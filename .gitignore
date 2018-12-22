@@ -1,0 +1,76 @@
+# Env
+/.env
+
+# composer
+/vendor
+composer.phar
+## remove in production!
+composer.lock
+
+# IDE
+.idea
+nbproject
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# Mac DS_Store Files
+.DS_Store
+
+# phpunit
+phpunit.phar
+/phpunit.xml
+
+# Vagrant
+/.vagrant
+
+# tmp
+/tmp/*/
+
+# cache
+/cache/*/
+
+#logs
+/logs/*/
+
+#upload data
+/data/audio/*/
+/data/images/*/
+cache/mava_int_00f3d26be03e495b5e0b5673fa9051cb.mava
+cache/mava_int_05ce155cb7121ce8fb25abc6982b5ade.mava
+cache/mava_int_1095bf2bfad1a2c07bfc0b015d7ad643.mava
+cache/mava_int_1156cf843eeaadff97e76d28dff3e7fe.mava
+cache/mava_int_18054dbd59eaef44947e709a636c4e23.mava
+cache/mava_int_191bcddd46554dabef427b872275f121.mava
+cache/mava_int_232160b83be19c79b6eb12fa620696c9.mava
+cache/mava_int_24a4565e2893ac3be98c32265d9446d8.mava
+cache/mava_int_2d6a51b1c090fe176af77dce91604024.mava
+cache/mava_int_312d23fd60ed8f4103a87965e2805bf2.mava
+cache/mava_int_48bffe48c7da381fc32362f430ff139c.mava
+cache/mava_int_4922fb7805f4dde3a8def4eb03dc95e7.mava
+cache/mava_int_502e51a2d432b950144dd1c1c3272c18.mava
+cache/mava_int_55d5cfe2171c09540ecb39008943793a.mava
+cache/mava_int_55e754bd2bcdcc460edc9012230bf3f5.mava
+cache/mava_int_68162d20cea2de90c2f6552f1c2d323d.mava
+cache/mava_int_7825545499291dbe6f8f606e626cee46.mava
+cache/mava_int_7bf8237f7c4577fe5be7c505b1bfebc1.mava
+cache/mava_int_890816646cefd388c0707a3a2917e361.mava
+cache/mava_int_9c9297033f0491b011931d81a950ab39.mava
+cache/mava_int_9e9eb0d1874eb7109d465c32870b02aa.mava
+cache/mava_int_a077928bae3b7cbf71e577862fe10dc8.mava
+cache/mava_int_a4f333d0108c4296ca5e16646c11af5a.mava
+cache/mava_int_a5b44719202d50f4bd9d5864b08763da.mava
+cache/mava_int_a6f4f00f4ad87db69da141e4ef5dba98.mava
+cache/mava_int_ae191c242444041f527568567a4fea5c.mava
+cache/mava_int_c3a5758118365a8d8f0704c06f4a9e6c.mava
+cache/mava_int_c3eeae8771564762f900d7257f8a691d.mava
+cache/mava_int_c9ede7d6b8f1f7c8885e8d9a421dd740.mava
+cache/mava_int_db3e88ffee94f77d2297afcde15dc3cb.mava
+cache/mava_int_dee06addad20beaef0a5ce4e125bdbb1.mava
+cache/mava_int_dfa73d3ece15df8d3611b5329ccb3b2a.mava
+cache/mava_int_ed98ef42e5e694251fac71e930cff705.mava
+cache/mava_int_f3e791aa11999c001870867362adad33.mava
+cache/mava_int_f75e0d3c4a15227e53bb1240e049d2b3.mava
