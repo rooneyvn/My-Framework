@@ -1,2 +1,2 @@
-# My-Framework by Nguyen Phạm
+# PHP Framework by Nguyen Phạm
 phamvannguyen.haui@gmail.com
