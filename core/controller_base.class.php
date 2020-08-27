@@ -12,8 +12,8 @@ Abstract Class baseController {
     function __construct($registry) {
         $this->registry = $registry;
         $this->module  = $registry->module;
-        $this->model = &baseModel::getInstance();
-        $this->view  = &baseView::getInstance();
+        $this->model = new baseModel();
+        $this->view  = new baseView();
     }
 
 

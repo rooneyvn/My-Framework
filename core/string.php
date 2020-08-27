@@ -1,6 +1,6 @@
 <?php
 
-class String
+class BaseString
 {
     public static function price_format($price, $unit = 'VND')
     {

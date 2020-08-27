@@ -1,7 +1,7 @@
 <?php
 return array(
-    //'domain' => 'http://localhost/MyFramework/Basic/public',
-    'domain' => 'http://my-framework.local',
+    'domain' => 'http://localhost/My-Framework/public',
+    //'domain' => 'http://my-framework.local',
     'debug' => true,
     'db' => array(
         'host' => 'localhost',

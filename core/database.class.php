@@ -29,15 +29,15 @@ final class My_Database {
         $this->config->db_name  = $db['name'];
         $this->config->prefix   = $db['prefix'];
 
-        if (!$this->connection = mysql_connect($this->config->db_host, $this->config->db_user, $this->config->db_pass)) {
+        if (!$this->connection = mysqli_connect($this->config->db_host, $this->config->db_user, $this->config->db_pass)) {
             throw new My_Exception(__FILE__ .' | Error: Could not make a database connection using ' . $this->config->db_user . '@' . $this->config->db_host);
         }
 
-        if (!mysql_select_db($this->config->db_name, $this->connection)) {
+        if (!mysqli_select_db($this->connection, $this->config->db_name)) {
             throw new My_Exception(__FILE__ .' | Error: Could not connect to database ' . $this->config->db_name);
         }
 
-        mysql_query("SET NAMES 'UTF8'");
+        mysqli_query($this->connection, "SET NAMES 'UTF8'");
         $this->_initialized = true;
     }
 
@@ -49,21 +49,20 @@ final class My_Database {
             'start_time' => $time_start
         );
 
-        $resource = mysql_query($sql, $this->connection);
-
+        $resource = mysqli_query($this->connection, $sql);
         if ($resource) {
-            if (is_resource($resource)) {
+            if (is_object($resource)) {
                 $i = 0;
 
                 $data = array();
 
-                while ($result = mysql_fetch_assoc($resource)) {
+                while ($result = mysqli_fetch_assoc($resource)) {
                     $data[$i] = $result;
 
                     $i++;
                 }
 
-                mysql_free_result($resource);
+                mysqli_free_result($resource);
 
                 $query = new stdClass();
                 $query->row = isset($data[0]) ? $data[0] : array();
@@ -94,7 +93,7 @@ final class My_Database {
                 return TRUE;
             }
         } else {
-            throw new My_Exception(__FILE__ .' | Error: ' . mysql_error($this->connection) . '<br />Error No: ' . mysql_errno($this->connection) . '<br />' . $sql);
+            throw new My_Exception(__FILE__ .' | Error: ' . mysqli_error($this->connection) . '<br />Error No: ' . mysqli_errno($this->connection) . '<br />' . $sql);
         }
     }
 
@@ -107,7 +106,7 @@ final class My_Database {
     }
 
     public function update($tableName, $data = array(), $condition = ''){
-        if(sizeof($data) > 0 && $tableName!=""){
+        if(is_array($data) && count($data) > 0 && $tableName!=""){
             $updateFields = array();
             foreach($data as $k => $v){
                 $fields[] = $k;
@@ -135,7 +134,7 @@ final class My_Database {
     }
 
     public function add($tableName, $data = array(), $hasPrimary = true){
-        if(sizeof($data) > 0 && $tableName!=""){
+        if(is_array($data) && count($data) > 0 && $tableName!=""){
             $fields = array();
             $values = array();
             $fieldString = '';
@@ -148,7 +147,7 @@ final class My_Database {
                     $values[] = $v;
                 }
             }
-            if(sizeof($data) > 1){
+            if(count($data) > 1){
                 $fieldString = '`'. implode('`,`',$fields) .'`';
                 $valueString = "'". implode("','",$values) ."'";
             }else{
@@ -174,7 +173,7 @@ final class My_Database {
         $args = func_get_args();
         if($args[0]!=""){
             $queryString = $args[0];
-            if(sizeof($args) > 1){
+            if(is_array($args) && count($args) > 1){
                 $count = 0;
                 foreach($args as $item){
                     $count++;
@@ -205,7 +204,7 @@ final class My_Database {
         $args = func_get_args();
         if($args[0]!=""){
             $queryString = $args[0];
-            if(sizeof($args) > 1){
+            if(is_array($args) && count($args) > 1){
                 $count = 0;
                 foreach($args as $item){
                     $count++;
@@ -232,9 +231,9 @@ final class My_Database {
 
     public function getSingleTableRow($table,$field = '*', $condition = array(), $skip = 0, $limit = 1, $order_by = '', $order_dir = 'asc'){
         $where = array();
-        if(sizeof($condition) > 0){
+        if(is_array($condition) && count($condition) > 0){
             foreach($condition as $con){
-                if(sizeof($con) == 3){
+                if(count($con) == 3){
                     if(strpos($con[2],')') === FALSE){
                         $con[2] = "'". addslashes($con[2]) ."'";
                     }
@@ -242,7 +241,7 @@ final class My_Database {
                 }
             }
         }
-        if(sizeof($where) > 0){
+        if(count($where) > 0){
             $where = implode(' AND ',$where);
             $where = " WHERE ". $where;
         }else{
@@ -271,10 +270,10 @@ final class My_Database {
         if ($type !== null && array_key_exists($type = strtoupper($type), $this->_numericDataTypes)) {
             $quotedValue = '0';
             switch ($this->_numericDataTypes[$type]) {
-                case My_Database::INT_TYPE: // 32-bit integer
+                case Mava_Database::INT_TYPE: // 32-bit integer
                     $quotedValue = (string) intval($value);
                     break;
-                case My_Database::BIGINT_TYPE: // 64-bit integer
+                case Mava_Database::BIGINT_TYPE: // 64-bit integer
                     // ANSI SQL-style hex literals (e.g. x'[\dA-F]+')
                     // are not supported here, because these are string
                     // literals, not numeric literals.
@@ -290,7 +289,7 @@ final class My_Database {
                         $quotedValue = $matches[1];
                     }
                     break;
-                case My_Database::FLOAT_TYPE: // float or decimal
+                case Mava_Database::FLOAT_TYPE: // float or decimal
                     $quotedValue = sprintf('%F', $value);
             }
             return $quotedValue;
@@ -300,11 +299,11 @@ final class My_Database {
     }
 
     /**
-    * Quote a raw string.
-    *
-    * @param string $value     Raw string
-    * @return string           Quoted string
-    */
+     * Quote a raw string.
+     *
+     * @param string $value     Raw string
+     * @return string           Quoted string
+     */
     protected function _quote($value)
     {
         if (is_int($value)) {
@@ -320,20 +319,20 @@ final class My_Database {
     }
 
     public function escape($value) {
-        return mysql_real_escape_string($value, $this->connection);
+        return mysqli_real_escape_string($value, $this->connection);
     }
 
     public function countAffected() {
-        return mysql_affected_rows($this->connection);
+        return mysqli_affected_rows($this->connection);
     }
 
     public function getLastId() {
-        return mysql_insert_id($this->connection);
+        return mysqli_insert_id($this->connection);
     }
 
     public function __destruct() {
         if(is_resource($this->connection)){
-            mysql_close($this->connection);
+            mysqli_close($this->connection);
         }
     }
 }

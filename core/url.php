@@ -196,4 +196,37 @@ class Url {
         $address .= isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : getenv('REQUEST_URI');
         return $address;
     }
+
+    public static function buildLink($moduleControllerAction,$params = array()){
+        $queryString = '';
+        $segment = array();
+        if(is_array($params) && count($params) > 0){
+            foreach($params as $k => $v){
+                if($v != ""){
+                    $segment[] = urlencode($k) .'='. urlencode($v);
+                }
+            }
+            if(count($segment) > 0){
+                $queryString = '?'. implode('&', $segment);
+            }
+        }
+        return self::getDomainUrl() .'/'. $moduleControllerAction . $queryString;
+    }
+
+    public static function getDomainUrl(){
+        return getDomainUrl();
+    }
+
+
+    public static function getPageLink($alias = '', $params = array()){
+        $queryString = '';
+        $segment = array();
+        if(count($params) > 0){
+            foreach($params as $k => $v){
+                $segment[] = urlencode($k) .'='. urlencode($v);
+            }
+            $queryString = '?'. implode('&', $segment);
+        }
+        return self::getDomainUrl() .'/'. $alias . $queryString;
+    }
 }

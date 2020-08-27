@@ -1,0 +1,50 @@
+body{
+    font-size: 15px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    max-width: 1170px;
+    margin: 0 auto;
+    background-color: #f8f8f8;
+}
+ul li{
+    margin: 10px 0;
+}
+.post-list ul li{
+    list-style: none;
+    font-size: 16px;
+}
+.post-content{
+    padding: 30px;
+    background: #fff;
+    font-size: 16px;
+}
+.post-content img{
+    max-width: 100%;
+    height: auto;
+}
+.mava_pagination{
+    margin: 40px 0;
+}
+.mava_pagination a{
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 5px;
+    border: 1px solid #d5d5d5;
+}
+.mava_pagination a.selected{
+    color: #fff;
+    background-color: green;
+}
+.mava_pagination a:hover{
+    color: #fff;
+    background-color: green;
+}
+.mava_pagination a.disabled{
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
+.mava_pagination a.disabled:hover{
+    background-color: transparent;
+}
