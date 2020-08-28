@@ -76,8 +76,6 @@ Class baseView
                 $$key = $value;
             }
             include($viewPath);
-
-            include($viewPath);
         } else {
             throw new My_Exception(__FILE__ . ' | View not exist');
         }
